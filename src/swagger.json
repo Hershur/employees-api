@@ -1,0 +1,161 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Employees API",
+        "description": "A simple RESTful API that provides a service for creating, getting all, getting, updating and deleting a specific employee"
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "summary": "Get all the employees",
+                "responses": {
+                    "200": {
+                        "description": "A successful response, all employees displayed"
+                    }
+                }
+            }
+        },
+        "/{empId}": {
+            "parameters": [
+                {
+                    "name": "empId",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of employee",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "summary": "Get a specific employees",
+                "responses": {
+                    "200": {
+                        "description": "Specific employee details is displayed"
+                    },
+                    "400": {
+                        "description": "Employee does not exists"
+                    }
+                }
+            }
+        },
+        "/add": {
+            "post": {
+                "summary": "Create a new employee",
+                "requestBody": {
+                    "description": "The route should accept JSON data containing employee details e.g first, last name etc. ",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/EmployeeData"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Specific employee details is displayed"
+                    },
+                    "400": {
+                        "description": "Employee does not exists"
+                    }
+                }
+            }
+        },
+        "/{empId}/update": {
+            "parameters": [
+                {
+                    "name": "empId",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of employee",
+                    "type": "string"
+                }
+            ],
+            "put": {
+                "summary": "Update an employee details",
+                "requestBody": {
+                    "description": "The route should accept JSON data containing employee details e.g first, last name etc. ",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/EmployeeData"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of all employees is returned showing the modified details"
+                    },
+                    "400": {
+                        "description": "Employee does not exists"
+                    }
+                }
+            }
+        },
+        "/{empId}/delete": {
+            "parameters": [
+                {
+                    "name": "empId",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of employee",
+                    "type": "string"
+                }
+            ],
+            "delete": {
+                "summary": "Delete an employee details",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of all employees is returned excluding the deleted employee"
+                    },
+                    "400": {
+                        "description": "Employee does not exists"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "EmployeeData": {
+            "type": "object",
+            "properties": {
+                "first_name": {
+                "type": "string",
+                "example": "Assurance"
+                },
+                "last_name": {
+                "type": "string",
+                "example": "Femi"
+                },
+                "age": {
+                "type": "string",
+                "example": 30
+                },
+                "join_date": {
+                "type": "string",
+                "example": "2021-05-18T00:00:00.000Z"
+                }
+            },
+            "description": "Employee details"
+        }
+    }
+      
+}
